@@ -19,7 +19,7 @@ class QueryProcessor:
         definition = ''
         if definitionTag:
             definitionTag = definitionTag.text()
-
+        
         return self.analyze(query, code, definition)
             
     def buildUrl(self, term):

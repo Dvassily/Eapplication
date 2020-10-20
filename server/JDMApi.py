@@ -1,7 +1,9 @@
-from selectolax.parser import HTMLParser
-import requests as r
 from JDMResponse import *
 from QueryProcessor import *
+from ResponseFormatter import *
+
+from selectolax.parser import HTMLParser
+import requests as r
 
 class JDMApi:
     urlPrefix = 'http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel='
@@ -35,9 +37,8 @@ class JDMApi:
 
         if benchmarkEngine:
             benchmarkEngine.end()
-            
-        for query, definition in definitions.items():
-            print("Définition pour '" + query + '" : ' + definition)
+
+        return ResponseFormatter().formatResponse(query, definitions, domainTerms)
 
         print('Termes associés : ')
         domainTerms.sort(reverse=True)
