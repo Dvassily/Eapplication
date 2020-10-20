@@ -38,7 +38,7 @@ class JDMApi:
         if benchmarkEngine:
             benchmarkEngine.end()
 
-        return ResponseFormatter().formatResponse(query, definitions, domainTerms)
+        return ResponseFormatter().formatResponse(term, definitions, domainTerms)
 
         print('Termes associés : ')
         domainTerms.sort(reverse=True)
