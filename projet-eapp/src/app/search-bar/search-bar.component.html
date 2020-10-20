@@ -1,0 +1,6 @@
+<form id="search-bar-form" [formGroup]="searchForm" >
+  <div>
+    <input type="text" placeholder="Type query ..." formControlName="searchFormInput" />
+    <button type="submit" (click)="submitQuery()">></button>
+  </div>
+</form>
