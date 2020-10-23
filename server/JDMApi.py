@@ -25,6 +25,10 @@ class JDMApi:
             term = query[0]
             depth = query[1]
             response = self.queryProcessor.process(term)
+
+            if not response:
+                continue
+            
             if response.definition is not None:
                 definitions[term] = response.definition
 

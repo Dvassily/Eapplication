@@ -14,13 +14,19 @@ class QueryProcessor:
         query = urllib.parse.quote_plus(query, encoding='iso-8859-1')
         html = r.get(self.buildUrl(query))
         tree = HTMLParser(html.text)
-        code = tree.css_first('CODE').text()
+        codeTag = tree.css_first('CODE')
+
+        if not codeTag:
+            return None
+        
+        codeText = codeTag.text()
+
         definitionTag = tree.css_first('def')
         definition = ''
         if definitionTag:
             definitionTag = definitionTag.text()
         
-        return self.analyze(query, code, definition)
+        return self.analyze(query, codeText, definition)
             
     def buildUrl(self, term):
         return self.urlPrefix + term + self.urlPostfix
@@ -28,7 +34,6 @@ class QueryProcessor:
     def analyze(self, query, code, definition):
         response = JDMResponse()
         
-        tree = HTMLParser(code)
         response.definition = definition
         code.replace(definition, '')
         
