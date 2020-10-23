@@ -19,4 +19,21 @@
       {{term.name}}
     </button>
   </div>
+
+
+  <h5> Liste Des Associations </h5>
+
+  <div>
+    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.associations">
+      {{term.name}}
+    </button>
+  </div>
+
+  <h5> Liste Des Partie </h5>
+
+  <div>
+    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.parts">
+      {{term.name}}
+    </button>
+  </div>
 </div>
