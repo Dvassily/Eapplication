@@ -28,9 +28,4 @@ class JDMResponse:
 
     def getParts(self):
         relationDestNodes = [ relation.node2 for relation in self.relations if relation.relationType == CSVModel.RELATION_TYPE_HAS_PART]
-        return [ term for term in self.getTerms() if term.nodeId in relationDestNodes ]
-
-
-    def getAssociations(self):
-        pass
-        
+        return [ term for term in self.getTerms() if term.nodeId in relationDestNodes ]        
