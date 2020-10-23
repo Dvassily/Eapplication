@@ -31,4 +31,6 @@ class JDMResponse:
         return [ term for term in self.getTerms() if term.nodeId in relationDestNodes ]
 
 
+    def getAssociations(self):
+        pass
         

@@ -1,2 +1,5 @@
-<app-search-bar (querySubmitted)="handleQuery($event)"></app-search-bar>
-<app-result-list></app-result-list>
+<div class="m-4">
+  <ngx-spinner></ngx-spinner>
+  <app-search-bar (querySubmitted)="handleQuery($event)"></app-search-bar>
+  <app-result-list (selectItem)="handleQuery($event)" [data]="res"></app-result-list>
+</div>
