@@ -15,6 +15,7 @@ class JDMApi:
     def submit(self, mainQuery, benchmarkEngine = None):
         definitions = {}
         domainTerms = []
+        associations = []
         queue = [ (mainQuery, 0) ]
         
         if benchmarkEngine:
@@ -25,6 +26,10 @@ class JDMApi:
             term = query[0]
             depth = query[1]
             response = self.queryProcessor.process(term)
+
+            if not response:
+                continue
+            
             if response.definition is not None:
                 definitions[term] = response.definition
 
@@ -34,7 +39,8 @@ class JDMApi:
 
             if depth == 0:
                 domainTerms = response.getDomainTerms()
-
+                associations = response.getAssociations();
+                
         if benchmarkEngine:
             benchmarkEngine.end()
 
