@@ -145,7 +145,6 @@ def getAssociations(terme):
     print(df)
 
 def getParties(terme):
-
     termeHttp = terme
     termeHttp = urllib.parse.quote_plus(termeHttp, encoding='iso-8859-1')
     url = 'http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel=' + termeHttp + '&rel=9'

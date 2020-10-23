@@ -16,6 +16,7 @@ class JDMApi:
         definitions = {}
         domainTerms = []
         associations = []
+        parts = []
         queue = [ (mainQuery, 0) ]
         
         if benchmarkEngine:
@@ -40,11 +41,12 @@ class JDMApi:
             if depth == 0:
                 domainTerms = response.getDomainTerms()
                 associations = response.getAssociations();
+                parts = response.getParts();
                 
         if benchmarkEngine:
             benchmarkEngine.end()
 
-        return ResponseFormatter().formatResponse(term, definitions, domainTerms)
+        return ResponseFormatter().formatResponse(term, definitions, domainTerms, associations, parts)
 
         print('Termes associés : ')
         domainTerms.sort(reverse=True)
