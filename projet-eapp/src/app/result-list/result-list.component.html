@@ -1,22 +1,21 @@
-
-
-<div *ngIf="data">
-  <h2> {{ data.query }}</h2>
-
-  <h5> Liste de Definitions </h5>
-
-  <div>
-    <button (click)="onClickDef(item.key)" class="btn btn-sm btn-secondary m-1" *ngFor="let item of data.definition| keyvalue">
-      {{item.key}}
+<section *ngIf="data">
+  <section *ngIf="mustDisplayCategories()">
+    <h2> Résultats pour : {{ data.term }}</h2>
+    <button *ngFor="let property of data.query.properties">
+      {{ property }}
     </button>
-  </div>
+  </section>
+  <section *ngIf="! mustDisplayCategories()">
+    <h2> Définitions pour : {{ data.term }}</h2>
+    <section class="term-definition">
+      <ul>
+        <li *ngFor="let definition of definitions()">
+          {{ definition }}
+        </li>
+      </ul>
+    </section>
+  </section>
+</section>
 
-
-  <h5> Liste des Termes Assoscie au Domaine </h5>
-
-  <div>
-    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.domainTerms">
-      {{term.name}}
-    </button>
-  </div>
-</div>
+<!-- *ngFor="let item of data.definition| keyvalue"> -->
+<!-- *ngFor="let term of data.domainTerms" -->

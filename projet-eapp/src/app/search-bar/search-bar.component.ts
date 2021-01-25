@@ -16,9 +16,30 @@ export class SearchBarComponent implements OnInit {
     this.searchForm = new FormGroup({
       searchFormInput: new FormControl('')
     });
+
+    this.searchForm.get('searchFormInput')
+      .valueChanges.subscribe(this.onValueChanged);
   }
 
   submitQuery(): void {
-    this.querySubmitted.emit(this.searchForm.value.searchFormInput);
+    let query = '';
+    let tokens = this.searchForm.value.searchFormInput.split(' ');
+    let resultTokens = []
+
+    for (let index in tokens) {
+      if (! tokens[index].startsWith(':')) {
+        resultTokens.push('\'' + tokens[index] + '\'');
+      } else {
+        resultTokens.push(tokens[index]);
+      }
+    }
+
+    this.querySubmitted.emit(resultTokens.join(' '));
+  }
+
+  onValueChanged(input): void {
+    setTimeout(function() {
+
+    }, 350);
   }
 }

@@ -1,6 +1,7 @@
 from JDMResponse import *
 from QueryProcessor import *
 from ResponseFormatter import *
+from QueryParser import QueryParser
 
 from selectolax.parser import HTMLParser
 import requests as r
@@ -11,46 +12,72 @@ class JDMApi:
     
     def __init__(self):
         self.queryProcessor = QueryProcessor(JDMApi.urlPrefix, JDMApi.urlPostfix)
-    
-    def submit(self, mainQuery, benchmarkEngine = None):
-        definitions = {}
-        domainTerms = []
-        associations = []
-        parts = []
-        queue = [ (mainQuery, 0) ]
-        
+        self.queue = []
+
+    def submit(self, main_query_str, benchmarkEngine = None):
+        main_query = QueryParser(main_query_str).parse()
+        self.queue.append((main_query, 0))
+        done = []
+
         if benchmarkEngine:
             benchmarkEngine.begin()
             
-        while queue:
-            query = queue.pop()
-            term = query[0]
-            depth = query[1]
-            response = self.queryProcessor.process(term)
+        while self.queue:
+            current = self.queue.pop()
+            query = current[0]
+            depth = current[1]
+            done.append(self.handle(query, depth))
 
-            if not response:
-                continue
-            
-            if response.definition is not None:
-                definitions[term] = response.definition
-
-            response.refinements.sort()
-            for refinement in response.refinements:
-                queue.append((refinement.formattedName, depth + 1))
-
-            if depth == 0:
-                domainTerms = response.getDomainTerms()
-                associations = response.getAssociations();
-                parts = response.getParts();
-                
         if benchmarkEngine:
             benchmarkEngine.end()
 
-        return ResponseFormatter().formatResponse(term, definitions, domainTerms, associations, parts)
+        definitions = []
+        domain_terms = []
+        associations = []
+        parts = []
 
-        print('Termes associés : ')
-        domainTerms.sort(reverse=True)
+        for execution in done:
+            if execution.definition:
+                print(execution.definition)
+                definitions.append(execution.definition)
 
-        for term in domainTerms:
-            print(" - " + term.name + ", poids=" + str(term.weight))
-        print(len(domainTerms))
+            domain_terms.extend(execution.domain_terms)
+            associations.extend(execution.associations)
+            parts.extend(execution.parts)
+
+        return main_query, main_query.term, definitions, domain_terms, associations, parts
+
+    def handle(self, query, depth):
+        response = self.queryProcessor.process(query)
+        result = self.QueryExecution(query)
+
+        if not response:
+            return False
+
+        if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:
+            result.definition = response.definition
+
+        response.refinements.sort()
+        for refinement in response.refinements:
+            self.queue.append((self.makeQuery(refinement.name), depth + 1))
+
+        if depth == 0:
+            if not query.properties:
+                result.domain_terms = response.getDomainTerms()
+            if not query.properties:
+                result.associations = response.getAssociations()
+            if not query.properties:
+                result.parts = response.getParts()
+
+        return result
+
+    def makeQuery(self, term):
+        return QueryParser(':GET \'' + term + '\'').parse()
+
+    class QueryExecution:
+        def __init__(self, query):
+            self.query = query
+            self.definition = None
+            self.domain_terms = []
+            self.associations = []
+            self.parts = []

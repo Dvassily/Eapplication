@@ -12,18 +12,14 @@ export class AppComponent {
   res = null;
 
   constructor(private serverService: ServerService,
-
               private spinner: NgxSpinnerService) {
 
   }
 
 
   handleQuery(event : any) {
-
     this.spinner.show()
-    console.log(event)
-    this.serverService.getWord(event).subscribe(res => {
-      console.log("called")
+    this.serverService.getResult(event).subscribe(res => {
       this.res = res;
       this.spinner.hide()
     })
