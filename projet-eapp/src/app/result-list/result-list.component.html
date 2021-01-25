@@ -19,3 +19,29 @@
 
 <!-- *ngFor="let item of data.definition| keyvalue"> -->
 <!-- *ngFor="let term of data.domainTerms" -->
+
+  <!--h5> Liste des Termes Assoscie au Domaine </h5>
+
+  <div>
+    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.domainTerms">
+      {{term.name}}
+    </button>
+  </div>
+
+
+  <h5> Liste Des Associations </h5>
+
+  <div>
+    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.associations">
+      {{term.name}}
+    </button>
+  </div>
+
+  <h5> Liste Des Partie </h5>
+
+  <div>
+    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.parts">
+      {{term.name}}
+    </button>
+  </div>
+</div-->
