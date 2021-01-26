@@ -22,6 +22,18 @@ export class ResultListComponent implements OnInit {
     this.selectItem.emit(item);
   }
 
+  containsAnyDefinition() {
+    return this.data.definitions.length > 0;
+  }
+
+  containsAnyDomainTerm() {
+    return this.data.domainTerms.length > 0
+  }
+
+  containsAnyAssociation() {
+    return this.data.associations.length > 0
+  }
+
   mustDisplayCategories() {
     return (this.data.query.properties.length !== 1);
   }

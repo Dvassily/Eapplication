@@ -1,8 +1,14 @@
 <section *ngIf="data">
   <section *ngIf="mustDisplayCategories()">
     <h2> Résultats pour : {{ data.term }}</h2>
-    <button *ngFor="let property of data.query.properties">
-      {{ property }}
+    <button *ngIf="containsAnyDefinition()">
+      Définitions
+    </button>
+    <button *ngIf="containsAnyDomainTerm()">
+      Termes du domaine
+    </button>
+    <button *ngIf="containsAnyAssociation()">
+      Idées associées
     </button>
   </section>
   <section *ngIf="! mustDisplayCategories()">
