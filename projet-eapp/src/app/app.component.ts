@@ -17,9 +17,9 @@ export class AppComponent {
   }
 
 
-  handleQuery(event : any) {
+  handleQuery(query : any) {
     this.spinner.show()
-    this.serverService.getResult(event).subscribe(res => {
+    this.serverService.getResult(query).subscribe(res => {
       this.res = res;
       this.spinner.hide()
     })

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ServerService} from "../services/server.service";
 
 @Component({
   selector: 'app-result-list',
@@ -13,7 +14,7 @@ export class ResultListComponent implements OnInit {
 
   @Output() selectItem: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private serverService: ServerService) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +33,13 @@ export class ResultListComponent implements OnInit {
 
   containsAnyAssociation() {
     return this.data.associations.length > 0
+  }
+
+  loadDefinitions() {
+    console.log('foo');
+    this.serverService.getResult(":GET '" + this.data.query.term + "' :DEFINITIONS").subscribe(res => {
+      this.data = res;
+    })
   }
 
   mustDisplayCategories() {

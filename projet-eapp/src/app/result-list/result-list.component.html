@@ -1,7 +1,7 @@
 <section *ngIf="data">
   <section *ngIf="mustDisplayCategories()">
     <h2> Résultats pour : {{ data.term }}</h2>
-    <button *ngIf="containsAnyDefinition()">
+    <button *ngIf="containsAnyDefinition()"  (click)="loadDefinitions()">
       Définitions
     </button>
     <button *ngIf="containsAnyDomainTerm()">
