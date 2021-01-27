@@ -37,13 +37,13 @@ class JDMApi:
         parts = []
 
         for execution in done:
-            if execution.definition:
-                print(execution.definition)
-                definitions.append(execution.definition)
+            if execution is not None:
+                if execution.definition:
+                    definitions.append(execution.definition)
 
-            domain_terms.extend(execution.domain_terms)
-            associations.extend(execution.associations)
-            parts.extend(execution.parts)
+                    domain_terms.extend(execution.domain_terms)
+                    associations.extend(execution.associations)
+                    parts.extend(execution.parts)
 
         return main_query, main_query.term, definitions, domain_terms, associations, parts
 
@@ -52,12 +52,14 @@ class JDMApi:
         result = self.QueryExecution(query)
 
         if not response:
-            return False
+            print("No response for " + query.content)
+            return None
 
         if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:
             result.definition = response.definition
 
         response.refinements.sort()
+
         for refinement in response.refinements:
             self.queue.append((self.makeQuery(refinement.name), depth + 1))
 
@@ -72,7 +74,7 @@ class JDMApi:
         return result
 
     def makeQuery(self, term):
-        return QueryParser(':GET \'' + term + '\'').parse()
+        return QueryParser("'" + term + "'").parse()
 
     class QueryExecution:
         def __init__(self, query):
