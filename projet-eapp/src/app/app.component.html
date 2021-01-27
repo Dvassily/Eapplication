@@ -1,5 +1,18 @@
-<div class="m-4">
+<div>
+
   <ngx-spinner></ngx-spinner>
-  <app-search-bar (querySubmitted)="handleQuery($event)"></app-search-bar>
-  <app-result-list (selectItem)="handleQuery($event)" [data]="res"></app-result-list>
+  <p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Dico 2.0</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+  </p>
+
+  <div class="container">
+    <app-search-bar (onSearch)="onSearch($event)"></app-search-bar>
+    <app-result-list [data]="res"></app-result-list>
+  </div>
 </div>

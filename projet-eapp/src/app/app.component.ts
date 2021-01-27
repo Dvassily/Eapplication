@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ServerService} from "./services/server.service";
 import {NgxSpinnerService} from "ngx-spinner";
 
@@ -17,8 +17,9 @@ export class AppComponent {
   }
 
 
-  handleQuery(query : any) {
-    this.spinner.show()
+  onSearch(query: any) {
+    this.spinner.show();
+
     this.serverService.getResult(query).subscribe(res => {
       this.res = res;
       this.spinner.hide()

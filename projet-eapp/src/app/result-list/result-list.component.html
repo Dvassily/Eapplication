@@ -1,53 +1,5 @@
-<section *ngIf="data">
-  <section *ngIf="mustDisplayCategories()">
-    <h2> Résultats pour : {{ data.term }}</h2>
-    <button *ngIf="containsAnyDefinition()"  (click)="loadDefinitions()">
-      Définitions
-    </button>
-    <button *ngIf="containsAnyDomainTerm()">
-      Termes du domaine
-    </button>
-    <button *ngIf="containsAnyAssociation()">
-      Idées associées
-    </button>
-  </section>
-  <section *ngIf="! mustDisplayCategories()">
-    <h2> Définitions pour : {{ data.term }}</h2>
-    <section class="term-definition">
-      <ul>
-        <li *ngFor="let definition of definitions()">
-          {{ definition }}
-        </li>
-      </ul>
-    </section>
-  </section>
-</section>
-
-<!-- *ngFor="let item of data.definition| keyvalue"> -->
-<!-- *ngFor="let term of data.domainTerms" -->
-
-  <!--h5> Liste des Termes Assoscie au Domaine </h5>
-
-  <div>
-    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.domainTerms">
-      {{term.name}}
-    </button>
-  </div>
-
-
-  <h5> Liste Des Associations </h5>
-
-  <div>
-    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.associations">
-      {{term.name}}
-    </button>
-  </div>
-
-  <h5> Liste Des Partie </h5>
-
-  <div>
-    <button (click)="onClickDef(term.name)" class="btn btn-sm btn-secondary m-1" *ngFor="let term of data.parts">
-      {{term.name}}
-    </button>
-  </div>
-</div-->
+<div class="container">
+  <mat-card>
+    Simple card
+  </mat-card>
+</div>

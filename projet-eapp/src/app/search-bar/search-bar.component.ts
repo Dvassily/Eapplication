@@ -7,39 +7,32 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  searchForm: FormGroup;
-  @Output() querySubmitted = new EventEmitter<any>();
-  
+
+  @Output() onSearch = new EventEmitter<any>();
+
   constructor(private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
-    this.searchForm = new FormGroup({
-      searchFormInput: new FormControl('')
-    });
 
-    this.searchForm.get('searchFormInput')
-      .valueChanges.subscribe(this.onValueChanged);
   }
 
-  submitQuery(): void {
+  submitQuery(input: string): void {
     let query = '';
-    let tokens = this.searchForm.value.searchFormInput.split(' ');
+    let tokens = input.trim().split(' ');
     let resultTokens = []
 
-    for (let index in tokens) {
-      if (! tokens[index].startsWith(':')) {
-        resultTokens.push('\'' + tokens[index] + '\'');
-      } else {
-        resultTokens.push(tokens[index]);
-      }
-    }
+    // for (let index in tokens) {
+    //   if (! tokens[index].startsWith(':')) {
+    //     resultTokens.push('\'' + tokens[index] + '\'');
+    //   } else {
+    //     resultTokens.push(tokens[index]);
+    //   }
+    // }
 
-    this.querySubmitted.emit(resultTokens.join(' '));
+    this.onSearch.emit('test');
   }
 
   onValueChanged(input): void {
-    setTimeout(function() {
-
-    }, 350);
+    this.submitQuery(input.target.value);
   }
 }

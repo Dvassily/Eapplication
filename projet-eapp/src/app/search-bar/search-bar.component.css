@@ -1,18 +1,4 @@
-form#search-bar-form {
-    width: 100%;
-}
-
-form#search-bar-form div {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-}
-
-form#search-bar-form input {
-    width: 90%;
-}
-
-form#search-bar-form button {
-    width: 9%;
+.example-full-width {
+  width: 40%;
+  min-width: 320px;
 }
