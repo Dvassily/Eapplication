@@ -29,7 +29,7 @@ export class SearchBarComponent implements OnInit {
     //   }
     // }
 
-    this.onSearch.emit('test');
+    this.onSearch.emit(input);
   }
 
   onValueChanged(input): void {
