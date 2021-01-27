@@ -17,7 +17,6 @@ class QueryProcessor:
         code_tag = tree.css_first('CODE')
 
         if not code_tag:
-            print(html.text)
             return None
         
         code_text = code_tag.text()
