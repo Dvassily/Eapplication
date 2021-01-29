@@ -23,16 +23,16 @@ class ResponseFormatter:
     STATUS_ERROR = 0
     STATUS_OK = 1
 
-    def formatQueryResult(self, query, term, definitions, domainTerms, associations, parts):
+    def formatQueryResult(self, apiResponse):
         result_dict = dict()
 
         result_dict[ResponseFormatter.STATUS_KEY] = ResponseFormatter.STATUS_OK
-        result_dict[ResponseFormatter.TERM_KEY] = term
-        result_dict[ResponseFormatter.QUERY_KEY] = query.toDict()
-        result_dict[ResponseFormatter.DEFINITIONS_KEY] = definitions
-        result_dict[ResponseFormatter.DOMAIN_TERMS_KEY] = [ term.__dict__ for term in domainTerms ]
-        result_dict[ResponseFormatter.ASSOCIATIONS_KEY] = [ association.__dict__ for association in associations ]
-        result_dict[ResponseFormatter.PARTS_KEY] = [ part.__dict__ for part in parts ]
+        result_dict[ResponseFormatter.TERM_KEY] = apiResponse.query.term
+        result_dict[ResponseFormatter.QUERY_KEY] = apiResponse.query.toDict()
+        result_dict[ResponseFormatter.DEFINITIONS_KEY] = apiResponse.definitions
+        result_dict[ResponseFormatter.DOMAIN_TERMS_KEY] = [ term.__dict__ for term in apiResponse.domain_terms ]
+        result_dict[ResponseFormatter.ASSOCIATIONS_KEY] = [ association.__dict__ for association in apiResponse.associations ]
+        result_dict[ResponseFormatter.PARTS_KEY] = [ part.__dict__ for part in apiResponse.parts ]
 
         return json.dumps(result_dict, indent=2)
 
