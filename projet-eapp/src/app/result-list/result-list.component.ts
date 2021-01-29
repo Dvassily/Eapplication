@@ -47,6 +47,6 @@ export class ResultListComponent implements OnInit {
     const regexp = new RegExp(/\s*([1-9]\s*\.)/gm);
 
 
-    return this.data.definitions.join(' ').replace(regexp, '<br><br><strong>$1</strong>');
+    return this.data.definitions.join(' ');
   }
 }

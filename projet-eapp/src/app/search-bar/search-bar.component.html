@@ -6,10 +6,28 @@
         <input (change)="onValueChanged($event)" matInput placeholder="">
       </mat-form-field>
 
+
       <button mat-mini-fab color="primary"  aria-label="Example icon button with a home icon">
         <mat-icon>search</mat-icon>
       </button>
     </div>
+
+
+    <mat-card>
+      <p>Poids Minimal</p>
+      <mat-slider thumbLabel tickInterval="1" min="0"  max="30000"></mat-slider>
+    </mat-card>
+
+    <mat-card>
+      <p>Poids Maximale</p>
+      <mat-slider thumbLabel tickInterval="1" min="0"  max="30000"></mat-slider>
+    </mat-card>
+
+
+    <mat-card>
+      <p>Trier Par</p>
+      <mat-slider thumbLabel tickInterval="1" min="0"  max="30000"></mat-slider>
+    </mat-card>
 
 
 
