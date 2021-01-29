@@ -16,6 +16,7 @@ class JDMApi:
         self.queue = []
 
     def submit(self, main_query_str, benchmarkEngine = None):
+        main_query_str = self.quoteTerms(main_query_str)
         main_query = QueryParser(main_query_str).parse()
         self.queue.append((main_query, 0))
         responses = []
@@ -54,11 +55,14 @@ class JDMApi:
                 if not query.properties:
                     result.parts.extend(response.getParts())
 
-        if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:
-            result.definitions.append(response.definition)
+            if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:
+                result.definitions.append(response.definition)
+
 
         return result
-    
+
+    def quoteTerms(self, query):
+        return ' '.join([ (keyword if keyword.startswith(':') else ("'" + keyword + "'")) for keyword in query.split(' ') ])
 
     def makeQuery(self, term):
-        return QueryParser("'" + term + "'").parse()
+        return QueryParser(self.quoteTerms(term)).parse()
