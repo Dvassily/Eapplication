@@ -9,6 +9,7 @@ import urllib.parse
 
 class JDMResponse:
     def __init__(self):
+        self.query_str = None
         self.definition = None
         self.refinements = []
         self.terms = []

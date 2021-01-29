@@ -13,8 +13,8 @@ CORS(app)
 @app.route('/get/<query>')
 def handleQuery(query):
     benchmark_engine = BenchmarkEngine()
-    query, term, definitions, domainTerms, associations, parts = api.submit(query, benchmark_engine)
-    response = ResponseFormatter().formatQueryResult(query, term, definitions, domainTerms, associations, parts)
+    apiResponse = api.submit(query, benchmark_engine)
+    response = ResponseFormatter().formatQueryResult(apiResponse)
     print("Délai de réponse : " + str(benchmark_engine.duration) + " seconds")
     benchmark_engine.reset()
     return response

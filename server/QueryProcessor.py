@@ -25,13 +25,14 @@ class QueryProcessor:
         if definition_tag:
             definition = definition_tag.text()
 
-        return self.processGet(query.term, query.properties, code_text, definition)
+        return self.processGet(query.term, query.properties, code_text, definition, query)
             
     def buildUrl(self, term):
         return self.url_prefix + term + self.url_postfix
 
-    def processGet(self, term, properties, code, definition):
+    def processGet(self, term, properties, code, definition, query):
         response = JDMResponse()
+        response.query_str = query.content
         response.definition = definition
 
         csv_lines = code.split('\n')
