@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ServerService} from "../services/server.service";
+import {ServerService} from '../services/server.service';
 
 @Component({
   selector: 'app-result-list',
@@ -14,6 +14,14 @@ export class ResultListComponent implements OnInit {
 
   @Output() selectItem: EventEmitter<any> = new EventEmitter();
 
+
+  public defMap = {
+    DEFINITIONS_KEY: 'definitions',
+    DOMAIN_TERMS_KEY: 'domainTerms',
+    ASSOCIATIONS_KEY: 'associations',
+    PARTS_KEY: 'parts',
+  };
+
   constructor(private serverService: ServerService) { }
 
   ngOnInit(): void {
@@ -23,40 +31,22 @@ export class ResultListComponent implements OnInit {
     this.selectItem.emit(item);
   }
 
-  containsAnyDefinition() {
-    return this.data.definitions.length > 0;
-  }
-
-  containsAnyDomainTerm() {
-    return this.data.domainTerms.length > 0
-  }
-
-  containsAnyAssociation() {
-    return this.data.associations.length > 0
-  }
 
   loadDefinitions() {
-    console.log('foo');
-    this.serverService.getResult(":GET '" + this.data.query.term + "' :DEFINITIONS").subscribe(res => {
+    this.serverService.getResult(':GET \'' + this.data.query.term + '\' :DEFINITIONS').subscribe(res => {
       this.data = res;
-    })
+    });
   }
 
   mustDisplayCategories() {
     return (this.data.query.properties.length !== 1);
   }
 
-  definitions() {
-    let result = []
+  getDefinitions() {
+    const result = [];
+    const regexp = new RegExp(/\s*([1-9]\s*\.)/gm);
 
-    for (let definition of this.data.definitions) {
-      console.log(definition);
-      const regexp = new RegExp("/\d\.\s/g");
-      let subDefinitions = definition.split(regexp)
-      console.log(subDefinitions);
-      result.push(definition);
-    }
 
-    return result;
+    return this.data.definitions.join(' ').replace(regexp, '<br><br><strong>$1</strong>');
   }
 }
