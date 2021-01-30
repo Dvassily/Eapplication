@@ -32,6 +32,12 @@ export class SearchBarComponent implements OnInit {
     this.onSearch.emit(input);
   }
 
+  formatLabel(value: number) {
+
+    return `${Math.floor((value * 100) / 30000)}%`;
+  }
+
+
   onValueChanged(input): void {
     this.submitQuery(input.target.value);
   }
