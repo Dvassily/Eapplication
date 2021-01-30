@@ -5,6 +5,7 @@ from CSVModel import *
 from selectolax.parser import HTMLParser
 import urllib.parse
 import requests as r
+import re
 
 class QueryProcessor:
     def __init__(self, url_prefix, url_postfix):
