@@ -54,12 +54,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { WordDetailComponent } from './result-list/word-detail/word-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
     ResultListComponent,
+    WordDetailComponent,
 
   ],
   imports: [

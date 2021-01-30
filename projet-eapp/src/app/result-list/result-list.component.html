@@ -13,62 +13,45 @@
 
     <h2 class="my-4"> Plus d'information a propos du mot </h2>
 
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Associations
-        </mat-panel-title>
+<!--    <mat-expansion-panel hideToggle>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Associations-->
+<!--        </mat-panel-title>-->
 
-      </mat-expansion-panel-header>
+<!--      </mat-expansion-panel-header>-->
 
-      <div>
-        <p>Pertinance</p>
-        <mat-slider thumbLabel tickInterval="1" [displayWith]="formatLabel"
-                    min="0" max="30000"></mat-slider>
-      </div>
+<!--      <div>-->
+<!--        <p>Pertinance</p>-->
+<!--        <mat-slider thumbLabel tickInterval="1" [displayWith]="formatLabel"-->
+<!--                    min="0" max="30000"></mat-slider>-->
+<!--      </div>-->
 
-      <p>
-         <span class="badge badge-secondary m-1" *ngFor="let association of data.associations">
-         {{association.name}}
-      </span>
-      </p>
-    </mat-expansion-panel>
+<!--      <p>-->
+<!--         <span class="badge badge-secondary m-1" *ngFor="let association of data.associations">-->
+<!--         {{association.name}}-->
+<!--      </span>-->
+<!--      </p>-->
+<!--    </mat-expansion-panel>-->
 
 
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Domain Terms
-        </mat-panel-title>
 
-      </mat-expansion-panel-header>
+<!--    <mat-expansion-panel hideToggle>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Parts-->
+<!--        </mat-panel-title>-->
 
-      <div class="d-flex justify-content-end">
-        <div class="ml-auto">
-          <p>Pertinance</p>
-          <mat-slider [(ngModel)]="domainTermsWeight" thumbLabel tickInterval="1" [displayWith]="formatLabel"
-                      min="0" max="20000"></mat-slider>
-        </div>
-      </div>
+<!--      </mat-expansion-panel-header>-->
+<!--      <p>-->
+<!--         <span class="badge badge-secondary m-1" *ngFor="let part of data.parts">-->
+<!--          {{part.name}}-->
+<!--      </span>-->
+<!--      </p>-->
+<!--    </mat-expansion-panel>-->
 
-      <span class="" *ngFor="let term of data.domainTerms">
-        <span class="badge badge-secondary m-1" *ngIf="term.weight > domainTermsWeight">{{term.name }}</span>
-      </span>
-    </mat-expansion-panel>
 
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Parts
-        </mat-panel-title>
-
-      </mat-expansion-panel-header>
-      <p>
-         <span class="badge badge-secondary m-1" *ngFor="let part of data.parts">
-          {{part.name}}
-      </span>
-      </p>
-    </mat-expansion-panel>
+    <app-word-detail title="Domain Term" [terms]="data.domainTerms"></app-word-detail>
 
 
   </mat-card>
