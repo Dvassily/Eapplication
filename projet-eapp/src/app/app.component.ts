@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ServerService} from "./services/server.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ export class AppComponent {
   title = 'projet-eapp';
   res = null;
 
+
+  public noCache = false;
+
   constructor(private serverService: ServerService,
               private spinner: NgxSpinnerService) {
 
@@ -20,9 +24,10 @@ export class AppComponent {
   onSearch(query: any) {
     this.spinner.show();
 
-    this.serverService.getResult(query).subscribe(res => {
+    this.serverService.getResult(query, this.noCache).subscribe(res => {
       this.res = res;
       this.spinner.hide()
     })
   }
+
 }
