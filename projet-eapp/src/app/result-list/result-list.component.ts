@@ -15,6 +15,8 @@ export class ResultListComponent implements OnInit {
   @Output() selectItem: EventEmitter<any> = new EventEmitter();
 
 
+  public domainTermsWeight = 4000;
+
   public defMap = {
     DEFINITIONS_KEY: 'definitions',
     DOMAIN_TERMS_KEY: 'domainTerms',
@@ -37,7 +39,10 @@ export class ResultListComponent implements OnInit {
       this.data = res;
     });
   }
+  formatLabel(value: number) {
 
+    return `${Math.floor((value * 100) / 20000)}%`;
+  }
   mustDisplayCategories() {
     return (this.data.query.properties.length !== 1);
   }
@@ -47,6 +52,6 @@ export class ResultListComponent implements OnInit {
     const regexp = new RegExp(/\s*([1-9]\s*\.)/gm);
 
 
-    return this.data.definitions.join(' ');
+    return this.data.definitions.join(' ').replace(regexp, '<br><br><strong>$1</strong>');
   }
 }

@@ -2,6 +2,8 @@
   <mat-card *ngIf="data">
 
     <h2> Definitions </h2>
+
+
     <p [innerHTML]="getDefinitions()">
 
     </p>
@@ -18,6 +20,13 @@
         </mat-panel-title>
 
       </mat-expansion-panel-header>
+
+      <div>
+        <p>Pertinance</p>
+        <mat-slider thumbLabel tickInterval="1" [displayWith]="formatLabel"
+                    min="0" max="30000"></mat-slider>
+      </div>
+
       <p>
          <span class="badge badge-secondary m-1" *ngFor="let association of data.associations">
          {{association.name}}
@@ -33,11 +42,18 @@
         </mat-panel-title>
 
       </mat-expansion-panel-header>
-      <p>
-        <span class="badge badge-secondary m-1" *ngFor="let term of data.domainTerms">
-        {{term.name }}
+
+      <div class="d-flex justify-content-end">
+        <div class="ml-auto">
+          <p>Pertinance</p>
+          <mat-slider [(ngModel)]="domainTermsWeight" thumbLabel tickInterval="1" [displayWith]="formatLabel"
+                      min="0" max="20000"></mat-slider>
+        </div>
+      </div>
+
+      <span class="" *ngFor="let term of data.domainTerms">
+        <span class="badge badge-secondary m-1" *ngIf="term.weight > domainTermsWeight">{{term.name }}</span>
       </span>
-      </p>
     </mat-expansion-panel>
 
     <mat-expansion-panel hideToggle>
