@@ -13,6 +13,12 @@
 
   <div class="container">
     <app-search-bar (onSearch)="onSearch($event)"></app-search-bar>
+    <div>
+      Désactive le cache serveur  
+      <mat-slide-toggle  [(ngModel)]="noCache"></mat-slide-toggle>
+    </div>
+
+
     <app-result-list [data]="res"></app-result-list>
   </div>
 </div>

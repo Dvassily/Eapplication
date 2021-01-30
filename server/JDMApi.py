@@ -3,6 +3,7 @@ from QueryProcessor import *
 from ResponseFormatter import *
 from QueryParser import QueryParser
 from JDMApiResponse import JDMApiResponse
+from JDMCache import JDMCache
 
 from selectolax.parser import HTMLParser
 import requests as r
@@ -14,21 +15,37 @@ class JDMApi:
     def __init__(self):
         self.queryProcessor = QueryProcessor(JDMApi.urlPrefix, JDMApi.urlPostfix)
         self.queue = []
+        self.cache = JDMCache()
 
     def submit(self, main_query_str, benchmarkEngine = None):
         main_query_str = self.quoteTerms(main_query_str)
         main_query = QueryParser(main_query_str).parse()
+
+        if benchmarkEngine:
+            benchmarkEngine.begin()
+
+
+        from_cache = self.getFromCache(main_query)
+
+        if from_cache is not None:
+            if benchmarkEngine:
+                benchmarkEngine.end()
+
+            return from_cache
+
         self.queue.append((main_query, 0))
         responses = []
 
         if benchmarkEngine:
             benchmarkEngine.begin()
-            
+
         while self.queue:
             current = self.queue.pop()
             query = current[0]
             depth = current[1]
+            in_cache = False
             response = self.queryProcessor.process(query)
+            self.insertToCache(query, response, query.content == main_query_str)
 
             if response:
                 responses.append(response)
@@ -60,6 +77,38 @@ class JDMApi:
 
 
         return result
+
+    def getFromCache(self, query):
+        response = JDMApiResponse(query)
+
+        definitions = self.cache.findDefinitions(query.term)
+
+        if not definitions:
+            return None
+
+        domain_terms = self.cache.findDomainTerms(query.term)
+
+        if not domain_terms:
+            return None
+
+        associations = self.cache.findAssociations(query.term)
+
+        if not associations:
+            return None
+
+        response.definitions = definitions
+        response.domain_terms = domain_terms
+        response.associations = associations
+
+        return response
+
+    def insertToCache(self, query, response, is_main_query):
+        self.cache.insertDefinition(query, response.definition)
+        self.cache.insertRefinements(query, response.getRefinements())
+
+        if is_main_query:
+            self.cache.insertDomainTerms(query, response.getDomainTerms())
+            self.cache.insertAssociations(query, response.getAssociations())
 
     def quoteTerms(self, query):
         return ' '.join([ (keyword if keyword.startswith(':') else ("'" + keyword + "'")) for keyword in query.split(' ') ])
