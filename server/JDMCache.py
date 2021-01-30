@@ -59,8 +59,8 @@ class JDMCache:
         if not terms:
             return
 
-        find_node_origin = "MERGE (o:Term { name : '" + query.term + "'})"
-        nodeToCreate = []
+        find_node_origin = "MERGE (o:Term { nodeToCreate : '" + name.query + "'})"
+        term = []
 
         try:
             session = self.driver.session()
