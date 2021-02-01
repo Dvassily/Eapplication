@@ -12,12 +12,15 @@
   </p>
 
   <div class="container">
-    <app-search-bar (onSearch)="onSearch($event)"></app-search-bar>
+    <app-search-bar (onSearch)="onSearch($event); begin();"></app-search-bar>
     <div>
       Désactive le cache serveur  
       <mat-slide-toggle  [(ngModel)]="noCache"></mat-slide-toggle>
     </div>
-
+    <div>
+      Déleai de la réponse:       
+      <span>{{ duration() / 1000 }}</span>
+    </div>
 
     <app-result-list [data]="res"></app-result-list>
   </div>
