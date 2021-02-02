@@ -46,7 +46,7 @@ class JDMApi:
             response = self.queryProcessor.process(query)
 
             if with_cache:
-                self.insertToCache(query, response, query.content == main_query_str)
+                self.cache.insert(query, response, query.content == main_query_str)
 
             if response:
                 responses.append(response)
@@ -102,14 +102,6 @@ class JDMApi:
         response.associations = associations
 
         return response
-
-    def insertToCache(self, query, response, is_main_query):
-        self.cache.insertDefinition(query, response.definition)
-        self.cache.insertRefinements(query, response.getRefinements())
-
-        if is_main_query:
-            self.cache.insertDomainTerms(query, response.getDomainTerms())
-            self.cache.insertAssociations(query, response.getAssociations())
 
     def quoteTerms(self, query):
         return ' '.join([ (keyword if keyword.startswith(':') else ("'" + keyword + "'")) for keyword in query.split(' ') ])
