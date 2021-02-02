@@ -11,7 +11,7 @@ import requests as r
 class JDMApi:
     urlPrefix = 'http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel='
     urlPostfix = '&rel='
-    
+
     def __init__(self):
         self.queryProcessor = QueryProcessor(JDMApi.urlPrefix, JDMApi.urlPostfix)
         self.queue = []
@@ -72,6 +72,11 @@ class JDMApi:
                     result.associations.extend(response.getAssociations())
                 if not query.properties:
                     result.parts.extend(response.getParts())
+                if not query.properties:
+                    result.synonyms.extend(response.getSynonyms())
+                if not query.properties:
+                    print(response.getAntonyms())
+                    result.antonyms.extend(response.getAntonyms())
 
             if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:
                 result.definitions.append(response.definition)
@@ -97,9 +102,27 @@ class JDMApi:
         if not associations:
             return None
 
+        parts = self.cache.findParts(query.term)
+
+        if not parts:
+            return None
+
+        synonyms = self.cache.findSynonyms(query.term)
+
+        if not synonyms:
+            return None
+
+        antonyms = self.cache.findAntonyms(query.term)
+
+        if not antonyms:
+            return None
+
         response.definitions = definitions
         response.domain_terms = domain_terms
         response.associations = associations
+        response.parts = parts
+        response.synonyms = synonyms
+        response.antonyms = antonyms
 
         return response
 

@@ -7,3 +7,5 @@ class JDMApiResponse:
         self.domain_terms = []
         self.associations = []
         self.parts = []
+        self.synonyms = []
+        self.antonyms = []

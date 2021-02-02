@@ -11,6 +11,8 @@ class ResponseFormatter:
     DOMAIN_TERMS_KEY = 'domainTerms'
     ASSOCIATIONS_KEY = 'associations';
     PARTS_KEY = 'parts';
+    SYNONYMS_KEY = 'synonyms';
+    ANTONYMS_KEY = 'antonyms';
 
     # For query parsing results
     COMMAND_KEY = 'command'
@@ -33,6 +35,8 @@ class ResponseFormatter:
         result_dict[ResponseFormatter.DOMAIN_TERMS_KEY] = [ term.__dict__ for term in apiResponse.domain_terms ]
         result_dict[ResponseFormatter.ASSOCIATIONS_KEY] = [ association.__dict__ for association in apiResponse.associations ]
         result_dict[ResponseFormatter.PARTS_KEY] = [ part.__dict__ for part in apiResponse.parts ]
+        result_dict[ResponseFormatter.SYNONYMS_KEY] = [ synonym.__dict__ for synonym in apiResponse.synonyms ]
+        result_dict[ResponseFormatter.ANTONYMS_KEY] = [ antonym.__dict__ for antonym in apiResponse.antonyms ]
 
         return json.dumps(result_dict, indent=2)
 
