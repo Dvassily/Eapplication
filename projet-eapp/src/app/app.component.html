@@ -11,8 +11,13 @@
     </mat-toolbar>
   </p>
 
+
+
   <div class="container">
     <app-search-bar (onSearch)="onSearch($event); begin();"></app-search-bar>
+
+    <app-result-list [data]="res"></app-result-list>
+
     <div>
       Désactive le cache serveur  
       <mat-slide-toggle  [(ngModel)]="noCache"></mat-slide-toggle>
@@ -21,7 +26,5 @@
       Déleai de la réponse:       
       <span>{{ duration() / 1000 }}</span>
     </div>
-
-    <app-result-list [data]="res"></app-result-list>
   </div>
 </div>

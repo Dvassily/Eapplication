@@ -26,3 +26,7 @@ def parseQuery(query_str):
         return ResponseFormatter().formatQueryParsingResult(query)
     except TextXSyntaxError as err:
         return ResponseFormatter().formatQueryParsingError(err)
+
+
+
+app.run()
