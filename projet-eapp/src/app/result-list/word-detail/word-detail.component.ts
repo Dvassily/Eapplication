@@ -18,7 +18,7 @@ export class WordDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.domainTermsWeight = this.getTermMaxWeight() / 3;
+    this.domainTermsWeight = 0;
   }
 
 
@@ -27,7 +27,7 @@ export class WordDetailComponent implements OnInit {
   }
 
 
-  getTermMaxWeight() {
+  get getTermMaxWeight() {
 
     const res = this.terms.reduce((acc, newValue) => {
       if (newValue > acc) {
