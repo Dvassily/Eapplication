@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {MatSlider} from "@angular/material/slider";
 
 @Component({
@@ -12,13 +12,13 @@ export class WordDetailComponent implements OnInit {
   @Input() title: string;
   @Input() terms: Array<any>;
 
-  public domainTermsWeight = 150;
+  public domainTermsWeight;
 
   constructor() {
   }
 
   ngOnInit(): void {
-
+    this.domainTermsWeight = this.getTermMaxWeight() / 3;
   }
 
 
@@ -28,11 +28,14 @@ export class WordDetailComponent implements OnInit {
 
 
   getTermMaxWeight() {
+
     const res = this.terms.reduce((acc, newValue) => {
       if (newValue > acc) {
         acc = newValue;
       }
     }, 0);
+
+    console.log(res)
 
     return res;
   }

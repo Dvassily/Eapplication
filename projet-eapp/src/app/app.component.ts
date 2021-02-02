@@ -22,12 +22,6 @@ export class AppComponent {
 
   }
 
-  getTime(){
-    var time = new Date().getTime();
-    return time 
-  }
-  
-
   onSearch(query: any) {
     this.spinner.show();
 
@@ -36,7 +30,6 @@ export class AppComponent {
       this.spinner.hide()
       this.end();
     })
-    console.log(this.startTime, this.endTime);
 
   }
   begin(){  
