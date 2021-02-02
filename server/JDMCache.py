@@ -2,10 +2,13 @@
 from neo4j import GraphDatabase
 
 from Node import Node
+import csv
 
 class JDMCache:
     def __init__(self):
-        self.driver = GraphDatabase.driver("bolt://localhost:11003", auth=("basil", "password"))
+        with open('dbconnection.txt', 'r') as reader:
+            connectionArray = list(csv.reader(reader.read().split('\n'), delimiter=';'))[1]
+            self.driver = GraphDatabase.driver(connectionArray[0] + ':' + connectionArray[1], auth=(connectionArray[2], connectionArray[3]))
 
     def close(self):
         if self.driver is not None:
