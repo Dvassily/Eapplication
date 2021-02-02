@@ -1,16 +1,15 @@
 <div class="container">
   <mat-card *ngIf="data">
 
-    <h2> Definitions </h2>
-
-
-    <p [innerHTML]="getDefinitions()">
-
-    </p>
-
-
+    <div class="d-flex justify-content-center">
+    
+      <h2 class="my-4"> Définitions </h2>
+    </div>
+      <p [innerHTML]="getDefinitions()">
+    
     <mat-divider></mat-divider>
 
+  <div class="d-flex justify-content-center">
     <h2 class="my-4"> Plus d'information a propos du mot </h2>
 
 <!--    <mat-expansion-panel hideToggle>-->
@@ -50,9 +49,9 @@
 <!--      </p>-->
 <!--    </mat-expansion-panel>-->
 
-
+</div>
     <app-word-detail title="Domain Term" [terms]="data.domainTerms"></app-word-detail>
-
+  
 
   </mat-card>
 </div>

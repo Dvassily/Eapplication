@@ -38,7 +38,7 @@ output: v8.10.0
 $ npm install -g angular-cli
 ```
 
-**Pour vérifier**
+**_Pour vérifier_**
 
 ```console
 $ ng version
@@ -90,12 +90,13 @@ Créer un Projet dans `neo4j` en cliquant sur `new` avec un nom (Eapplication pa
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
 
-Puis ajouter une base de données en cliquant sur `add` et donner un nom à la base de données. 
+Puis ajouter une base de données en cliquant sur `add` et donner un nom à la base de données.
 Après avoir créé la base de donnée, démarrez-là en appuyant sur le bouton start. `start`.
 `
 <img src="./images/neo4j_start.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
+
 Enfin dans la partie `connected as` ajouter un `user`, `:server add user` donner le nom `basil` comme `username` et `password` pour `password`
 <img src="./images/neo4j_user.png"
      alt="Markdown Monster icon"
