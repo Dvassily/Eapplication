@@ -90,8 +90,9 @@ Créer un Projet dans `neo4j` en cliquant sur `new` avec un nom (Eapplication pa
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
 
-Puis ajouter une base de données en cliquant sur `add` et donner un nom à la base de données (JexDeMots par exemple)
-Après avoir créer la base de données lancer la sur `start`, si l'editeur ne s'ouvre pas vous pouvez l'ouvrir en cliquant sur `open`
+Puis ajouter une base de données en cliquant sur `add` et donner un nom à la base de données. 
+Après avoir créé la base de donnée, démarrez-là en appuyant sur le bouton start. `start`.
+`
 <img src="./images/neo4j_start.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
@@ -99,8 +100,6 @@ Enfin dans la partie `connected as` ajouter un `user`, `:server add user` donner
 <img src="./images/neo4j_user.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
-
-Pour une utilisation ultérieure il suffit de lancer juste la base de données sur `start`
 
 ## Angular
 
