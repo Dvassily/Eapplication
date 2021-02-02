@@ -13,11 +13,11 @@
 
   <div class="container">
     <app-search-bar (onSearch)="onSearch($event); begin();"></app-search-bar>
-    <div>
-      Désactive le cache serveur  
+    <div class="d-flex justify-content-center">
+      Désactive le cache serveur    
       <mat-slide-toggle  [(ngModel)]="noCache"></mat-slide-toggle>
     </div>
-    <div>
+    <div class="d-flex justify-content-center">
       Délai de la réponse:       
       <span>{{ duration() / 1000 }}</span>
     </div>
