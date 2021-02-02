@@ -10,7 +10,7 @@
     <div class="ml-auto">
       <p>Pertinance</p>
       <mat-slider [(ngModel)]="domainTermsWeight" thumbLabel tickInterval="1" [displayWith]="formatLabel"
-                  min="0" [max]="getTermMaxWeight"></mat-slider>
+                  min="0" [max]="getTermMaxWeight() / 3"></mat-slider>
     </div>
   </div>
 
