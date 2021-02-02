@@ -12,46 +12,14 @@
   <div class="d-flex justify-content-center">
     <h2 class="my-4"> Plus d'information a propos du mot </h2>
 
-<!--    <mat-expansion-panel hideToggle>-->
-<!--      <mat-expansion-panel-header>-->
-<!--        <mat-panel-title>-->
-<!--          Associations-->
-<!--        </mat-panel-title>-->
 
-<!--      </mat-expansion-panel-header>-->
-
-<!--      <div>-->
-<!--        <p>Pertinance</p>-->
-<!--        <mat-slider thumbLabel tickInterval="1" [displayWith]="formatLabel"-->
-<!--                    min="0" max="30000"></mat-slider>-->
-<!--      </div>-->
-
-<!--      <p>-->
-<!--         <span class="badge badge-secondary m-1" *ngFor="let association of data.associations">-->
-<!--         {{association.name}}-->
-<!--      </span>-->
-<!--      </p>-->
-<!--    </mat-expansion-panel>-->
-
-
-
-<!--    <mat-expansion-panel hideToggle>-->
-<!--      <mat-expansion-panel-header>-->
-<!--        <mat-panel-title>-->
-<!--          Parts-->
-<!--        </mat-panel-title>-->
-
-<!--      </mat-expansion-panel-header>-->
-<!--      <p>-->
-<!--         <span class="badge badge-secondary m-1" *ngFor="let part of data.parts">-->
-<!--          {{part.name}}-->
-<!--      </span>-->
-<!--      </p>-->
-<!--    </mat-expansion-panel>-->
 
 </div>
     <app-word-detail title="Domain Term" [terms]="data.domainTerms"></app-word-detail>
-  
+    <app-word-detail title="Associations" [terms]="data.associations"></app-word-detail>
+    <app-word-detail title="Antonyms" [terms]="data.antonyms"></app-word-detail>
+    <app-word-detail title="Synonymes" [terms]="data.synonyms"></app-word-detail>
+
 
   </mat-card>
 </div>
