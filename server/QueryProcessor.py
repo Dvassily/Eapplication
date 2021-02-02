@@ -43,11 +43,12 @@ class QueryProcessor:
         for entry in csv_ds:
             key = entry[0]
             if (key == CSVModel.KEY_NODE):
-                node = self.handleNode(entry, term)
-                response.terms.append(node)
+                if len(entry) == 5:
+                    node = self.handleNode(entry, term)
+                    response.terms.append(node)
 
-                if node.isRefinement:
-                    response.refinements.append(node)
+                    if node.isRefinement:
+                        response.refinements.append(node)
             
             elif (key == CSVModel.KEY_RELATION):
                 relation = self.handleRelation(entry)
@@ -64,7 +65,7 @@ class QueryProcessor:
         formattedName = None
         isRefinement = False
         name = None
-        
+
         if nodeType == CSVModel.NODE_TYPE_TERM:
             name = entry[CSVModel.INDEX_NODE_NAME].replace('\'', '')
 

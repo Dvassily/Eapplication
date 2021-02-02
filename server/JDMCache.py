@@ -5,7 +5,7 @@ from Node import Node
 
 class JDMCache:
     def __init__(self):
-        self.driver = GraphDatabase.driver("bolt://localhost:7687", auth=("basil", "password"))
+        self.driver = GraphDatabase.driver("bolt://localhost:11003", auth=("basil", "password"))
 
     def close(self):
         if self.driver is not None:
