@@ -17,17 +17,16 @@ class JDMApi:
         self.queue = []
         self.cache = JDMCache()
 
-    def submit(self, main_query_str, benchmarkEngine = None):
+    def submit(self, main_query_str, benchmarkEngine = None, with_cache = False):
         main_query_str = self.quoteTerms(main_query_str)
         main_query = QueryParser(main_query_str).parse()
 
         if benchmarkEngine:
             benchmarkEngine.begin()
 
-
         from_cache = self.getFromCache(main_query)
 
-        if from_cache is not None:
+        if with_cache and from_cache is not None:
             if benchmarkEngine:
                 benchmarkEngine.end()
 
@@ -45,7 +44,9 @@ class JDMApi:
             depth = current[1]
             in_cache = False
             response = self.queryProcessor.process(query)
-            self.insertToCache(query, response, query.content == main_query_str)
+
+            if with_cache:
+                self.cache.insert(query, response, query.content == main_query_str)
 
             if response:
                 responses.append(response)
@@ -101,14 +102,6 @@ class JDMApi:
         response.associations = associations
 
         return response
-
-    def insertToCache(self, query, response, is_main_query):
-        self.cache.insertDefinition(query, response.definition)
-        self.cache.insertRefinements(query, response.getRefinements())
-
-        if is_main_query:
-            self.cache.insertDomainTerms(query, response.getDomainTerms())
-            self.cache.insertAssociations(query, response.getAssociations())
 
     def quoteTerms(self, query):
         return ' '.join([ (keyword if keyword.startswith(':') else ("'" + keyword + "'")) for keyword in query.split(' ') ])
