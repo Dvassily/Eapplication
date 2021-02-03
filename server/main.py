@@ -19,7 +19,12 @@ def handleQuery(query):
     benchmark_engine = BenchmarkEngine()
     with_cache = not (request.args.get('disable_cache') == 'true')
     api_response = api.submit(query, benchmark_engine, with_cache)
-    response = ResponseFormatter().formatQueryResult(api_response)
+
+    if api_response is None:
+        response = ResponseFormatter().formatWordNotFoundError()
+    else:
+        response = ResponseFormatter().formatQueryResult(api_response)
+
     print("Délai de réponse : " + str(benchmark_engine.duration) + " seconds")
     benchmark_engine.reset()
     return response

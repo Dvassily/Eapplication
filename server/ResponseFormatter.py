@@ -22,8 +22,11 @@ class ResponseFormatter:
     COLUMN_KEY = 'column'
 
     # Status codes
-    STATUS_ERROR = 0
-    STATUS_OK = 1
+    STATUS_SYNTAX_ERROR = 0
+    STATUS_WORD_NOT_FOUND = 1
+    STATUS_OK = 2
+
+
 
     def formatQueryResult(self, apiResponse):
         result_dict = dict()
@@ -53,7 +56,14 @@ class ResponseFormatter:
     def formatQueryParsingError(self, error):
         result_dict = dict()
 
-        result_dict[ResponseFormatter.STATUS_KEY] = ResponseFormatter.STATUS_ERROR
+        result_dict[ResponseFormatter.STATUS_KEY] = ResponseFormatter.STATUS_SYNTAX_ERROR
         result_dict[ResponseFormatter.COLUMN_KEY] = error.col
+
+        return json.dumps(result_dict, indent=2)
+
+    def formatWordNotFoundError(self):
+        result_dict = dict()
+
+        result_dict[ResponseFormatter.STATUS_KEY] = ResponseFormatter.STATUS_WORD_NOT_FOUND
 
         return json.dumps(result_dict, indent=2)

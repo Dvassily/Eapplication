@@ -45,6 +45,11 @@ class JDMApi:
             in_cache = False
             response = self.queryProcessor.process(query)
 
+            if depth == 0 and response is None:
+                if benchmarkEngine:
+                    benchmarkEngine.end()
+                return None
+
             if with_cache:
                 self.cache.insert(query, response, query.content == main_query_str)
 
