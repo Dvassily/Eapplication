@@ -36,6 +36,7 @@ output: v8.10.0
 
 ```console
 $ npm install -g angular-cli
+$ npm install
 ```
 
 **_Pour vérifier_**
