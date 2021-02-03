@@ -10,7 +10,11 @@
       <button mat-mini-fab color="primary"  aria-label="Example icon button with a home icon">
         <mat-icon>search</mat-icon>
       </button>
+    
     </div>
-
+    <div class="text-center text-uppercase div-1 rounded">
+      <span *ngIf="mot" class="div-1">Resultats pour le mot {{mot}}</span>
+    </div>
+    
   </form>
 

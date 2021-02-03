@@ -11,6 +11,7 @@ export class SearchBarComponent implements OnInit {
   @Output() onSearch = new EventEmitter<any>();
 
   constructor(private formBuilder : FormBuilder) { }
+  mot : string;
 
   ngOnInit(): void {
 
@@ -39,6 +40,11 @@ export class SearchBarComponent implements OnInit {
 
 
   onValueChanged(input): void {
+    this.mot = input.target.value;
+    console.log(this.mot)
     this.submitQuery(input.target.value);
+  }
+  getValue(){
+    return this.mot;
   }
 }
