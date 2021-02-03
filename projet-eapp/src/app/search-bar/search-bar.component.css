@@ -2,3 +2,10 @@
   width: 40%;
   min-width: 320px;
 }
+.div-1 {
+  height: 20%;
+  background-color: darkturquoise;
+  text-size-adjust: 12px;
+  margin: 0 auto;
+  font-weight: bold;
+}
