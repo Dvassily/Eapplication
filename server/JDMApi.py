@@ -24,13 +24,13 @@ class JDMApi:
         if benchmarkEngine:
             benchmarkEngine.begin()
 
-        from_cache = self.getFromCache(main_query)
+        if with_cache:
+            from_cache = self.getFromCache(main_query)
 
-        if with_cache and from_cache is not None:
-            if benchmarkEngine:
-                benchmarkEngine.end()
-
-            return from_cache
+            if from_cache is not None:
+                if benchmarkEngine:
+                    benchmarkEngine.end()
+                return from_cache
 
         self.queue.append((main_query, 0))
         responses = []
