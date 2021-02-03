@@ -80,7 +80,6 @@ class JDMApi:
                 if not query.properties:
                     result.synonyms.extend(response.getSynonyms())
                 if not query.properties:
-                    print(response.getAntonyms())
                     result.antonyms.extend(response.getAntonyms())
 
             if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:
