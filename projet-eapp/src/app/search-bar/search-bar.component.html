@@ -3,11 +3,11 @@
 
       <mat-form-field class="example-full-width mr-4">
         <mat-label>Rechercher un mot</mat-label>
-        <input (change)="onValueChanged($event)" matInput placeholder="">
+        <input [(ngModel)]="model" name="input" (change)="submitQuery()" matInput placeholder="">
       </mat-form-field>
 
 
-      <button mat-mini-fab color="primary"  aria-label="Example icon button with a home icon">
+      <button (click)="submitQuery()" mat-mini-fab color="primary"  aria-label="Example icon button with a home icon">
         <mat-icon>search</mat-icon>
       </button>
     </div>

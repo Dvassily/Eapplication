@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {MatSlider} from "@angular/material/slider";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-word-detail',
@@ -8,35 +9,47 @@ import {MatSlider} from "@angular/material/slider";
 })
 export class WordDetailComponent implements OnInit {
 
-
   @Input() title: string;
   @Input() terms: Array<any>;
 
   public domainTermsWeight;
+  public model = '';
+  public fileteredWords: Array<any>;
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.domainTermsWeight = 0;
+    this.domainTermsWeight = 300;
+    this.fileteredWords = this.terms;
   }
 
+  search(term: string): void {
+    if(!term || term.length <= 0)
+      this.fileteredWords = this.terms;
+    
+    this.fileteredWords = this.terms.filter((value, idx) => {
+      return value.name.search(term.toLocaleLowerCase()) != -1;
+    });
+  }
 
   formatLabel(value: number) {
     return `${Math.floor((value * 100)  / (this as unknown)['max'])}%`;
   }
 
+  onSearchWord(term) {
+    this.router.navigateByUrl(`/?search=${term.name}`)
+  }
 
-  get getTermMaxWeight() {
 
-    const res = this.terms.reduce((acc, newValue) => {
-      if (newValue > acc) {
-        acc = newValue;
-      }
-    }, 0);
+   getTermMaxWeight() {
 
-    console.log(res)
+    let max = 0;
+  
+    for(let term of this.terms) {
+        console.log(term)
+    }
 
-    return res;
+    return 0;
   }
 }

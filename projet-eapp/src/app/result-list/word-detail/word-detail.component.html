@@ -12,9 +12,19 @@
       <mat-slider [(ngModel)]="domainTermsWeight" thumbLabel tickInterval="1" [displayWith]="formatLabel"
                   min="0" [max]="getTermMaxWeight"></mat-slider>
     </div>
+
+    <div class="ml-auto">
+      <p>Rechercher un mot </p>
+      <mat-form-field class="example-full-width mr-4">
+        <mat-label></mat-label>
+        <input [(ngModel)]="model" name="input" (input)="search($event.target.value)" matInput placeholder="">
+      </mat-form-field>
+    </div>
   </div>
 
-  <span class="" *ngFor="let term of terms">
-        <span class="badge badge-secondary m-1" *ngIf="term.weight > domainTermsWeight">{{term.name }}</span>
-      </span>
+  <span class="" *ngFor="let term of fileteredWords">
+        <a (click)="onSearchWord(term)" class="badge badge-secondary m-1" 
+        *ngIf="term.weight > domainTermsWeight">{{term.name }}</a>
+  </span>
+
 </mat-expansion-panel>
