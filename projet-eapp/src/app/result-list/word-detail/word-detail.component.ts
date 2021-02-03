@@ -26,6 +26,13 @@ export class WordDetailComponent implements OnInit {
     return `${Math.floor((value * 100)  / (this as unknown)['max'])}%`;
   }
 
+  name(term : object) : string {
+    if (term['formattedName'] !== null) {
+      return term['formattedName'];
+    }
+
+    return term['name'];
+  }
 
   get getTermMaxWeight() {
 
@@ -34,8 +41,6 @@ export class WordDetailComponent implements OnInit {
         acc = newValue;
       }
     }, 0);
-
-    console.log(res)
 
     return res;
   }

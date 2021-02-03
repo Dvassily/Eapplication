@@ -83,7 +83,7 @@ class JDMCache:
             set_formatted_name = " SET d.formattedName = " + str(term.formattedName)
             set_is_refinement = " SET d.isRefinement = " + str(term.isRefinement)
             query = find_node_origin + find_node_dest + create_relation
-            query += set_node_id + set_node_type + set_weight + set_is_refinement
+            query += set_node_id + set_node_type + set_weight + set_formatted_name + set_is_refinement
 
             if term.isRefinement:
                 query += set_is_refinement
