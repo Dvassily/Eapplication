@@ -41,7 +41,6 @@ export class SearchBarComponent implements OnInit {
 
   onValueChanged(input): void {
     this.mot = input.target.value;
-    console.log(this.mot)
     this.submitQuery(input.target.value);
   }
   getValue(){
