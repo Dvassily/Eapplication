@@ -15,7 +15,8 @@
   </div>
 
   <span class="" *ngFor="let term of terms">
+    
         <span class="badge badge-secondary m-1" 
-        [ngClass]="getTermColor(term)" *ngIf="term.weight > domainTermsWeight">{{term.name }}</span>
+        [ngClass]="getTermColor(term)" *ngIf="term.weight > domainTermsWeight">{{ name(term) }}</span>
       </span>
 </mat-expansion-panel>

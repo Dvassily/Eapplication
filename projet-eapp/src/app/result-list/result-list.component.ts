@@ -31,6 +31,7 @@ export class ResultListComponent implements OnInit {
 
 
   getDefinitions() {
+    console.log(this.data)
     const result = [];
     const regexp = new RegExp(/\s*([1-9]\s*\.)/gm);
 
