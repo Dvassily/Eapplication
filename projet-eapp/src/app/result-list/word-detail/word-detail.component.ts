@@ -28,15 +28,26 @@ export class WordDetailComponent implements OnInit {
 
 
   get getTermMaxWeight() {
-
+    
     const res = this.terms.reduce((acc, newValue) => {
       if (newValue > acc) {
         acc = newValue;
       }
     }, 0);
 
-    console.log(res)
-
     return res;
+  }
+  getTermColor(term){
+    if( term.weight >= 80 ){
+      return 'first';
+    } else{ 
+        if( term.weight >= 60 && term.weight <= 80 ){
+         return 'second';
+      } else{
+          if( term.weight >= 40 && term.weight < 60 ){
+            return 'third';
+          } else return 'fourth';
+      } 
+    } 
   }
 }
