@@ -43,12 +43,13 @@ class QueryProcessor:
         for entry in csv_ds:
             key = entry[0]
             if (key == CSVModel.KEY_NODE):
-                if len(entry) == 5:
                     node = self.handleNode(entry, term)
-                    response.terms.append(node)
 
-                    if node.isRefinement:
-                        response.refinements.append(node)
+                    if node is not None:
+                        response.terms.append(node)
+
+                        if node.isRefinement:
+                            response.refinements.append(node)
             
             elif (key == CSVModel.KEY_RELATION):
                 relation = self.handleRelation(entry)
@@ -59,25 +60,27 @@ class QueryProcessor:
     def handleNode(self, entry, term):
         depth = len(term.split('>'))
 
-        nodeType = int(entry[CSVModel.INDEX_NODE_TYPE])
-        nodeId = int(entry[CSVModel.INDEX_NODE_ID])
-        nodeWeight = int(entry[CSVModel.INDEX_NODE_WEIGHT])
-        formattedName = None
-        isRefinement = False
-        name = None
+        try:
+            nodeType = int(entry[CSVModel.INDEX_NODE_TYPE])
+            nodeId = int(entry[CSVModel.INDEX_NODE_ID])
+            nodeWeight = int(entry[CSVModel.INDEX_NODE_WEIGHT])
+            formattedName = None
+            isRefinement = False
+            name = None
 
-        if nodeType == CSVModel.NODE_TYPE_TERM:
-            name = entry[CSVModel.INDEX_NODE_NAME].replace('\'', '')
+            if nodeType == CSVModel.NODE_TYPE_TERM:
+                name = entry[CSVModel.INDEX_NODE_NAME].replace('\'', '')
 
-            if len(entry) > 5:
-                formattedName = entry[CSVModel.INDEX_NODE_FORMATTED_NAME]
-                formattedName = formattedName.replace('\'', '')
+                if len(entry) > 5:
+                    formattedName = entry[CSVModel.INDEX_NODE_FORMATTED_NAME]
+                    formattedName = formattedName.replace('\'', '')
 
-                if ">" in formattedName and (len(formattedName.split('>')) > depth) and formattedName.startswith(term + ">"):
-                    isRefinement = True
+                    if ">" in formattedName and (len(formattedName.split('>')) > depth) and formattedName.startswith(term + ">"):
+                        isRefinement = True
 
-        return Node(nodeId, name, nodeType, nodeWeight, formattedName, isRefinement)
-
+            return Node(nodeId, name, nodeType, nodeWeight, formattedName, isRefinement)
+        except ValueError:
+            return None
 
     def handleRelation(self, entry):
         relation_id = int(entry[CSVModel.INDEX_RELATION_TYPE])

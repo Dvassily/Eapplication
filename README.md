@@ -36,6 +36,7 @@ output: v8.10.0
 
 ```console
 $ npm install -g angular-cli
+$ npm install
 ```
 
 **_Pour vérifier_**
@@ -52,7 +53,7 @@ output:
 ### **Instalation du flask**
 
 ```console
-$ pip install Flask
+$ pip3 install -r requirements.txt
 ```
 
 Output:

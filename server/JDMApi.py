@@ -24,13 +24,13 @@ class JDMApi:
         if benchmarkEngine:
             benchmarkEngine.begin()
 
-        from_cache = self.getFromCache(main_query)
+        if with_cache:
+            from_cache = self.getFromCache(main_query)
 
-        if with_cache and from_cache is not None:
-            if benchmarkEngine:
-                benchmarkEngine.end()
-
-            return from_cache
+            if from_cache is not None:
+                if benchmarkEngine:
+                    benchmarkEngine.end()
+                return from_cache
 
         self.queue.append((main_query, 0))
         responses = []
@@ -80,7 +80,6 @@ class JDMApi:
                 if not query.properties:
                     result.synonyms.extend(response.getSynonyms())
                 if not query.properties:
-                    print(response.getAntonyms())
                     result.antonyms.extend(response.getAntonyms())
 
             if (not query.properties or (':DEFINITIONS' in query.properties)) and response.definition is not None:

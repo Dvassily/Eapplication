@@ -52,4 +52,26 @@ export class WordDetailComponent implements OnInit {
 
     return 0;
   }
+
+  name(term : object) : string {
+    if (term['formattedName'] !== null) {
+      return term['formattedName'];
+    }
+
+    return term['name'];
+  }
+
+  getTermColor(term){
+    if( term.weight >= 80 ){
+      return 'first';
+    } else{ 
+        if( term.weight >= 60 && term.weight <= 80 ){
+         return 'second';
+      } else{
+          if( term.weight >= 40 && term.weight < 60 ){
+            return 'third';
+          } else return 'fourth';
+      } 
+    } 
+  }
 }

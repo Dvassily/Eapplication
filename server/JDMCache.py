@@ -62,7 +62,7 @@ class JDMCache:
         self.insertTerms(query, parts, "PART_OF", tx)
 
     def insertSynonyms(self, query, synonyms, tx):
-        self.insertTerms(query, synoynms, "SYNONYM_OF", tx)
+        self.insertTerms(query, synonyms, "SYNONYM_OF", tx)
 
     def insertAntonyms(self, query, antonyms, tx):
         self.insertTerms(query, antonyms, "ANTONYM_OF", tx)
@@ -76,14 +76,14 @@ class JDMCache:
 
         for term in terms:
             find_node_dest = "MERGE (d:Term { name : '" + term.name + "'})"
-            create_relation = " MERGE (d) -[:" + relationLabel + "]-> (d)"
+            create_relation = " MERGE (o) -[:" + relationLabel + "]-> (d)"
             set_node_id = " SET d.nodeId = " + str(term.nodeId)
             set_node_type = " SET d.nodeType = " + str(term.nodeType)
             set_weight = " SET d.weight = " + str(term.weight)
             set_formatted_name = " SET d.formattedName = " + str(term.formattedName)
             set_is_refinement = " SET d.isRefinement = " + str(term.isRefinement)
             query = find_node_origin + find_node_dest + create_relation
-            query += set_node_id + set_node_type + set_weight + set_is_refinement
+            query += set_node_id + set_node_type + set_weight + set_formatted_name + set_is_refinement
 
             if term.isRefinement:
                 query += set_is_refinement

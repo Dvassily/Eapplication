@@ -23,7 +23,7 @@
   </div>
 
   <span class="" *ngFor="let term of fileteredWords">
-        <a (click)="onSearchWord(term)" class="badge badge-secondary m-1" 
+        <a [ngClass]="getTermColor(term)" (click)="onSearchWord(term)" class="badge badge-secondary m-1" 
         *ngIf="term.weight > domainTermsWeight">{{term.name }}</a>
   </span>
 
